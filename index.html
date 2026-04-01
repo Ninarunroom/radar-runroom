@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -290,27 +289,22 @@ const SYSTEMS={
 
 const QUERIES={
   pub:[
-    {label:'PLACE + Bidcrunch — publicidad digital activa',
-     prompt:`Busca HOY licitaciones ACTIVAS con plazo AÚN ABIERTO (abril 2026 o posterior) sobre publicidad digital, SEM, Google Ads, Meta Ads, campañas online, planificación de medios en España. Fuentes: bidcrunch.com/blog/licitaciones-publicidad (actualizado hoy), infoconcurso.com, licitaciones.io. Solo importes >80.000€. Para cada una clasifica aptitud para Runroom. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","aptitud":"apto|parcial|no","apt_razon","tags":[],"score":1-10}]`},
-    {label:'Turespaña · Renfe · UB · UAB · UPC · Ayto. Madrid · ICEX',
-     prompt:`Busca HOY licitaciones ACTIVAS con plazo abierto en 2026 de: Instituto de Turismo de España (Turespaña), Renfe-Operadora, Universitat de Barcelona, UAB, UPC, Ayuntamiento de Madrid área comunicación, ICEX. Busca en sus perfiles de contratante en PLACE y BOE. Solo publicidad, marketing digital, medios o comunicación >80.000€. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","aptitud":"apto|parcial|no","apt_razon","tags":[],"score":1-10}]`},
-    {label:'Universidades y organismos turismo autonómicos',
-     prompt:`Busca HOY licitaciones ACTIVAS con plazo abierto en 2026 de: UOC, UNED, UAM, UCM, UV, UPF, Agència Catalana de Turisme, Turisme de Barcelona, patronatos provinciales de turismo. Solo publicidad digital, SEM, captación estudiantes, campañas online >80.000€. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","aptitud":"apto|parcial|no","apt_razon","tags":[],"score":1-10}]`}
+    {label:'Licitaciones publicidad digital activas en España',
+     prompt:`Busca licitaciones ACTIVAS hoy en bidcrunch.com e infoconcurso.com sobre publicidad digital, SEM, Meta Ads, medios online en España. >80k€, plazo abierto 2026. JSON: [{"title","org","budget_text","deadline","url","summary","aptitud":"apto|parcial|no","apt_razon","tags":[],"score":1-10}]`},
+    {label:'Turespaña · Renfe · universidades · ICEX',
+     prompt:`Busca licitaciones ACTIVAS 2026 de Turespaña, Renfe, UB, UAB, UPC, Ayto Madrid comunicación, ICEX en PLACE y BOE. Solo publicidad digital o medios >80k€. JSON: [{"title","org","budget_text","deadline","url","summary","aptitud":"apto|parcial|no","apt_razon","tags":[],"score":1-10}]`}
   ],
   priv:[
-    {label:'Prensa especializada — concursos privados',
-     prompt:`Busca HOY en reasonwhy.es, elpublicista.es, marketingdirecto.com, ipmark.com, programapublicidad.com, dircomfidencial.com, scopen.com noticias de los ÚLTIMOS 60 DÍAS sobre concursos de agencia, pitches privados o selección de agencia de medios/marketing digital en España >100.000€. Solo noticias con fecha real 2025-2026. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","tags":[],"score":1-10}]`},
-    {label:'Interprofesionales · ONGs · cooperativas · Aena',
-     prompt:`Busca HOY convocatorias ACTIVAS con fecha 2025-2026 de agencias de publicidad o medios en: interprofesionaldelvino.es/convocatoria-concurso, interporc.com, intercitrus.org, inlac.es, cruzroja.es, fundaciononce.es, eroski.es, aena.es, rfef.es. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","tags":[],"score":1-10}]`}
+    {label:'Concursos privados de agencia en prensa especializada',
+     prompt:`Busca en reasonwhy.es, ipmark.com, marketingdirecto.com, dircomfidencial.com noticias 2025-2026 de concursos de agencia o pitch de medios digitales en España >100k€. JSON: [{"title","org","budget_text","deadline","url","summary","tags":[],"score":1-10}]`},
+    {label:'Interprofesionales · ONGs · Aena',
+     prompt:`Busca convocatorias 2025-2026 de agencia publicidad en: interporc.com, intercitrus.org, cruzroja.es, aena.es, eroski.es, rfef.es. JSON: [{"title","org","budget_text","deadline","url","summary","tags":[],"score":1-10}]`}
   ],
   sig:[
-    {label:'Cambios CMO · salidas · nuevos directivos marketing',
-     prompt:`Busca HOY en topcomunicacion.com, marketingdirecto.com, ipmark.com noticias de los ÚLTIMOS 60 DÍAS sobre: nuevos nombramientos O salidas de CMO, Director de Marketing, Head of Marketing en empresas españolas medianas-grandes. Sectores: retail, salud, educación, fintech, turismo. Incluye sdr_hook para cada señal. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","sdr_hook","tags":[],"score":1-10}]`},
-    {label:'Job postings paid media · rondas financiación',
-     prompt:`Busca HOY:
-1) Vacantes últimos 30 días de "Paid Media Manager", "Head of Performance", "SEM Manager" en empresas españolas +200 empleados (retail, salud, educación, fintech) en LinkedIn Jobs e InfoJobs.
-2) Startups españolas con ronda Serie A o superior en últimos 3 meses en retail digital, salud, educación, fintech (fuentes: elreferente.es, Crunchbase).
-Incluye sdr_hook para cada una. Devuelve SOLO JSON: [{"title","org","budget_text","deadline","url","summary","sdr_hook","tags":[],"score":1-10}]`}
+    {label:'Cambios CMO y directivos de marketing',
+     prompt:`Busca en topcomunicacion.com y marketingdirecto.com nombramientos o salidas de CMO/Director Marketing en empresas españolas en últimos 60 días. Incluye sdr_hook. JSON: [{"title","org","budget_text","deadline","url","summary","sdr_hook","tags":[],"score":1-10}]`},
+    {label:'Job postings paid media · rondas',
+     prompt:`Busca: 1) Vacantes "Paid Media Manager" o "Head of Performance" en empresas españolas en LinkedIn últimos 30 días. 2) Rondas Serie A+ en elreferente.es últimos 3 meses. Incluye sdr_hook. JSON: [{"title","org","budget_text","deadline","url","summary","sdr_hook","tags":[],"score":1-10}]`}
   ]
 };
 
