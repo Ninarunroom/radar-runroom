@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -419,6 +420,11 @@ async function scan(model){
   for(let i=0;i<queries.length;i++){
     const q=queries[i];
     st.textContent=`[${i+1}/${queries.length}] ${q.label}`;
+    if(i>0){
+      st.textContent=`Esperando 15s para respetar límite de API...`;
+      await new Promise(r=>setTimeout(r,15000));
+      st.textContent=`[${i+1}/${queries.length}] ${q.label}`;
+    }
     try{
       const res=await callAPI(q.prompt,SYSTEMS[model]);
       allResults[model].push(...res);
@@ -428,6 +434,7 @@ async function scan(model){
     }catch(e){
       console.error(e);
       if(e.message.includes('401')||e.message.includes('invalid')){showErr('API key inválida. Compruébala en console.anthropic.com');break;}
+      if(e.message.includes('429')){st.textContent='Límite de API alcanzado, esperando 30s...';await new Promise(r=>setTimeout(r,30000));}
     }
     pf.style.width=Math.round((i+1)/queries.length*100)+'%';
   }
